@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="../dist/vue-image-browser.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+  </head>
+  <body>
+    <script type="text/x-template" id="imageManagerTemplate">
+      <VueImageBrowser
+          :images="photos"
+          :image-properties="photoFields"
+          allow-photo-pane
+          allow-upload
+          allow-delete
+          enable-lazy-load>
+      </VueImageBrowser>
+    </script>
+
+    <div id="app">
+      <image-manager></image-manager>
+    </div>
+
+    <script src="demo.js"></script>
+  </body>
+</html>
