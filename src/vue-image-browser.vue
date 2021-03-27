@@ -25,6 +25,7 @@
       </div>
       <div class="flex-none" v-if="allowUpload">
         <button
+          type="button"
           class="text-white bg-blue-600 mx-2 px-4 py-2 rounded"
           title="Upload Image"
           @click="pane = 'upload'"
