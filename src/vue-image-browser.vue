@@ -267,11 +267,6 @@ export default {
       default: false,
     },
 
-    allowPhotoPane: {
-      type: Boolean,
-      default: false,
-    },
-
     allowChoose: {
       type: Boolean,
       default: false,
@@ -349,7 +344,7 @@ export default {
     select(photo) {
       this.selectedPhoto = photo
 
-      this.allowPhotoPane && (this.pane = 'photo')
+      this.pane = 'photo'
 
       this.captionable && (this.selectedPhoto['caption'] = this.getCaption())
 

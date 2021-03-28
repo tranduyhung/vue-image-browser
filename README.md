@@ -82,7 +82,6 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 | `allow-upload`         | Boolean | false         | (OPTIONAL) Whether or not to provide provision for image upload. If this is `true`, a `save-url` must be provided.                                                                               |
 | `save-url`             | String  | /api/photos   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
 | `save-request-headers` | Object  | `{}`          | (OPTIONAL) If you need to pass any additional HTTP headers, you may do so by providing the header names and values in this object                                                                |
-| `allow-photo-pane`     | Boolean | false         | (OPTIONAL) When this attribute is true, clicking on an image in the gallery will show a larger version of the image in a Photo pane, along with any additional image information.                |
 | `allow-delete`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for deleting an image in Photo Pane view. If this is true, delete button will be shown and a `deleted` event will be generated                  |
 | `allow-choose`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for chosing the image inside Photo Pane view. If this is true, a "Choose" button will be displayed and a `chosen` event will be generated       |
 | `allow-copy`           | Boolean | true          | (OPTIONAL) Whether or not to provide a provision for copying the image URL in the Photo Pane View. If this is true, a `Copy Link` button will be shown and image `url` will be copied to clipboard |
@@ -115,7 +114,6 @@ Following events are generated when performing various interactions with the ima
         <VueImageBrowser
             :images="photos"
             :image-properties="imageFields"
-            allow-photo-pane
             allow-choose
             allow-upload
             allow-delete
