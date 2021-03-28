@@ -274,7 +274,7 @@ export default {
 
     allowCopy: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     captionable: {
