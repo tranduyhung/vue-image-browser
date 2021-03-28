@@ -5,6 +5,24 @@
       class="w-full mx-auto py-4 bg-transparent my-4 flex items-center flex-no-wrap"
       id="top-panel"
     >
+      <div class="flex-grow flex">
+        <input
+          class="p-2 w-full rounded-l-lg rounded-r-lg sm:rounded-r-none border sm:border-r-0 border-gray-300 bg-white outline-none"
+          type="text"
+          v-model="query"
+          @keyup="doDelayedSearch"
+          placeholder="search..."
+        />
+        <div
+          class="hidden sm:flex relative pin-r rounded-r-lg border-r border-t border-b border-gray-300 bg-white py-1 px-2 items-center"
+        >
+          <span
+            v-if="searchResult"
+            class="py-1 px-2 bg-transparent rounded-lg text-xs whitespace-no-wrap"
+            v-text="searchResult"
+          ></span>
+        </div>
+      </div>
       <div class="flex-none" v-if="allowUpload">
         <button
           type="button"
@@ -239,6 +257,11 @@ export default {
       default: () => {},
     },
 
+    searchDelay: {
+      type: Number,
+      default: 500,
+    },
+
     allowDelete: {
       type: Boolean,
       default: false,
@@ -283,6 +306,8 @@ export default {
   data: function () {
     return {
       message: null,
+      query: '',
+      searchResult: null,
       pane: 'gallery',
       selectedPhoto: {},
       uploadableFiles: [],
@@ -431,6 +456,22 @@ export default {
     deleteSelected() {
       this.$emit('deleted', this.selectedPhoto)
       this.pane = 'gallery'
+    },
+
+    doDelayedSearch() {
+      let p = this
+
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
+      }
+
+      if (p.query.length > 0) p.searchResult = 'Searching...'
+      else p.searchResult = ''
+
+      this.timer = setTimeout(() => {
+        p.$emit('searched', p.query)
+      }, this.searchDelay)
     },
 
     // This is an experimental function that enables
