@@ -4,7 +4,7 @@
     <title>Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="../dist/vue-image-browser.min.js"></script>
+    <script src="../dist/vue-image-manager.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
@@ -12,7 +12,7 @@
   </head>
   <body>
     <script type="text/x-template" id="imageManagerTemplate">
-      <VueImageBrowser
+      <VueImageManager
           :images="photos"
           :image-properties="photoFields"
           :is-searching="isSearching"
@@ -27,7 +27,7 @@
           @saved="onSave"
           @deleted="onDelete"
           @searched="onSearch">
-      </VueImageBrowser>
+      </VueImageManager>
     </script>
 
     <div id="app">

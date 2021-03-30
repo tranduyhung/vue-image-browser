@@ -1,11 +1,11 @@
 // Import vue component
-import component from './vue-image-browser.vue';
+import component from './vue-image-manager.vue';
 
 // Declare install function executed by Vue.use()
 export function install(Vue) {
 	if (install.installed) return;
 	install.installed = true;
-	Vue.component('VueImageBrowser', component);
+	Vue.component('VueImageManager', component);
 }
 
 // Create module definition for Vue.use()

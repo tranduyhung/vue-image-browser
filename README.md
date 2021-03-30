@@ -1,16 +1,14 @@
-# An Image Browser Component Built with VueJs
+# An Image Manager Component Built with VueJs
 
 ![](images/example-image-1.png)
 
-A JavaScript Image Browser written in [VueJS](https://vuejs.org/) and styled with [Spectre.css](https://picturepan2.github.io/spectre/).
+A JavaScript Image Manager written in [VueJS](https://vuejs.org/) and styled with [Spectre.css](https://picturepan2.github.io/spectre/).
 
 ## Features
 - Image Upload
 - Local or Remote Image Search
-- Show larger image (Photo Pane view)
 - Delete Image
 - Show arbitrary information about the image
-- Generate Or Capture Image Caption
 - Lazy Load Images on scroll
 
 ## Usage
@@ -18,7 +16,7 @@ A JavaScript Image Browser written in [VueJS](https://vuejs.org/) and styled wit
 Install as npm package
 
 ```
-npm install @akashmitra/vue-image-browser
+UNDER DEVELOPMENT
 ```
 
 `import` this as a component. You may also use this inside another Vue component.
@@ -26,21 +24,21 @@ npm install @akashmitra/vue-image-browser
 ```javascript
 <template>
 
-    <VueImageBrowser
+    <VueImageManager
         :images="photos"
         :image-properties="photoFields"
         allow-upload
         allow-delete
         enable-lazy-load>
-    </VueImageBrowser>
+    </VueImageManager>
 
 </template>
 <script>
-import VueImageBrowser from '@akashmitra/vue-image-browser'
+import VueImageManager from '@tranduyhung/vue-image-manager'
 
 export default {
     components: {
-        VueImageBrowser,
+        VueImageManager,
     },
     data() {
         return {
@@ -61,7 +59,7 @@ export default {
 
 ## Image Object
 
-The `images` attribute in `VueImageBrowser` accepts an array containing one or more "image objects" with following mandatory fields - `id`, `name` and `url`. The image object can contain other fields as well. You can specify the additional fields in `image-properties` as key-value pairs, where the `key` is the attribute name and the `value` is the attribute title.
+The `images` attribute in `VueImageManager` accepts an array containing one or more "image objects" with following mandatory fields - `id`, `name` and `url`. The image object can contain other fields as well. You can specify the additional fields in `image-properties` as key-value pairs, where the `key` is the attribute name and the `value` is the attribute title.
 
 
 
@@ -108,7 +106,7 @@ Following events are generated when performing various interactions with the ima
 <template>
 
 
-        <VueImageBrowser
+        <VueImageManager
             :images="photos"
             :image-properties="imageFields"
             allow-upload
@@ -121,18 +119,18 @@ Following events are generated when performing various interactions with the ima
             @deleted="onDelete"
             @searched="onSearch"
             >
-        </VueImageBrowser>
+        </VueImageManager>
 
 
 </template>
 
 <script>
 
-import VueImageBrowser from '@akashmitra/vue-image-browser'
+import VueImageBrowser from '@tranduyhung/vue-image-manager'
 
 export default {
     components: {
-        VueImageBrowser,
+        VueImageManager,
     },
     data() {
         return {

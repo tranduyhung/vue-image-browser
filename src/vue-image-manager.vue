@@ -232,7 +232,7 @@
 
 <script>
 export default {
-  name: 'vue-image-browser',
+  name: 'vue-image-manager',
 
   props: {
     images: {

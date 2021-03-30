@@ -5,7 +5,7 @@ import buble from '@rollup/plugin-buble'; // Transpile/polyfill with reasonable 
 export default {
     input: 'src/wrapper.js', // Path relative to package.json
     output: {
-        name: 'VueImageBrowser',
+        name: 'VueImageManager',
         exports: 'named',
     },
     external: [],

@@ -1,22 +1,22 @@
 {
-  "name": "@akashmitra/vue-image-browser",
+  "name": "@akashmitra/vue-image-manager",
   "version": "1.2.4",
-  "description": "A VueJS Image Browser Component with options to upload, browse, delete and select images",
-  "main": "/dist/vue-image-browser.umd.js",
-  "module": "dist/vue-image-browser.esm.js",
-  "unpkg": "dist/vue-image-browser.min.js",
+  "description": "A VueJS image manager component with options to upload, browse, delete. Based on https://github.com/akash-mitra/vue-image-manager/",
+  "main": "/dist/vue-image-manager.umd.js",
+  "module": "dist/vue-image-manager.esm.js",
+  "unpkg": "dist/vue-image-manager.min.js",
   "browser": {
-    "./sfc": "src/vue-image-browser.vue"
+    "./sfc": "src/vue-image-manager.vue"
   },
   "scripts": {
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-image-browser.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-image-browser.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-image-browser.min.js"
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-image-manager.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-image-manager.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-image-manager.min.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akash-mitra/vue-image-browser.git"
+    "url": "git+https://github.com/tranduyhung/vue-image-manager.git"
   },
   "keywords": [
     "vue",
@@ -24,21 +24,21 @@
     "browser",
     "gallery"
   ],
-  "author": "Akash Mitra",
+  "author": "Hung Tran",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/akash-mitra/vue-image-browser/issues"
+    "url": "https://github.com/tranduyhung/vue-image-manager/issues"
   },
-  "homepage": "https://github.com/akash-mitra/vue-image-browser#readme",
+  "homepage": "https://github.com/tranduyhung/vue-image-manager#readme",
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
     "@rollup/plugin-commonjs": "^12.0.0",
     "autoprefixer": "^9.8.6",
     "chunk": "0.0.3",
-    "core-js": "^3.6.5",
+    "core-js": "^3.9.1",
     "postcss": "^7.0.32",
     "postcss-import": "^12.0.1",
-    "rollup": "^2.26.5",
+    "rollup": "^2.44.0",
     "rollup-plugin-vue": "^5.1.9",
     "tailwindcss": "^1.7.3",
     "vue": "^2.6.12",
