@@ -2,7 +2,7 @@
 
 ![](images/example-image-1.png)
 
-A JavaScript Image Browser written in [VueJS](https://vuejs.org/) and styled with [TailwindCSS](https://tailwindcss.com/docs/installation/).
+A JavaScript Image Browser written in [VueJS](https://vuejs.org/) and styled with [Spectre.css](https://picturepan2.github.io/spectre/).
 
 ## Features
 - Image Upload
@@ -193,4 +193,4 @@ export default {
 
 ## Dependency
 
-[TailwindCSS](https://tailwindcss.com/docs/installation/) must be present for the styling.
+[Spectre.css](https://picturepan2.github.io/spectre/) must be present for the styling.
