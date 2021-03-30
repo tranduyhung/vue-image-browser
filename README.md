@@ -26,7 +26,6 @@ UNDER DEVELOPMENT
 
     <VueImageManager
         :images="photos"
-        :image-properties="photoFields"
         allow-upload
         allow-delete
         enable-lazy-load>
@@ -59,7 +58,7 @@ export default {
 
 ## Image Object
 
-The `images` attribute in `VueImageManager` accepts an array containing one or more "image objects" with following mandatory fields - `id`, `name` and `url`. The image object can contain other fields as well. You can specify the additional fields in `image-properties` as key-value pairs, where the `key` is the attribute name and the `value` is the attribute title.
+The `images` attribute in `VueImageManager` accepts an array containing one or more "image objects" with following mandatory fields - `id`, `name` and `url`. The image object can contain other fields as well.
 
 
 
@@ -76,7 +75,6 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 | Parameter              | Type    | Default Value | Description                                                                                                                                                                                      |
 |------------------------|---------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `images`               | Array   | `[]`          | An array containing the image objects. Each image object must contain `id`, `name` and `url` of the image                                                                                        |
-| `image-properties`     | Object  |               | An object containing all the fields in image object along with the field titles                                                                                                                  |
 | `allow-upload`         | Boolean | false         | (OPTIONAL) Whether or not to provide provision for image upload. If this is `true`, a `save-url` must be provided.                                                                               |
 | `save-url`             | String  | /api/photos   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
 | `save-request-headers` | Object  | `{}`          | (OPTIONAL) If you need to pass any additional HTTP headers, you may do so by providing the header names and values in this object                                                                |
@@ -108,7 +106,6 @@ Following events are generated when performing various interactions with the ima
 
         <VueImageManager
             :images="photos"
-            :image-properties="imageFields"
             allow-upload
             allow-delete
             enable-lazy-load

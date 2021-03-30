@@ -102,29 +102,30 @@
       </div>
     </div>
 
-    <div v-if="pane === 'photo'" class="w-full px-4 postcard-container">
-      <div class="w-full postcard">
+    <div v-if="pane === 'photo'">
+      <figure
+        class="figure"
+      >
         <img
           :src="selectedPhoto.url"
           :title="selectedPhoto.name"
-          class="mx-auto shadow-lg mg-photo"
+          class="img-responsive p-centered"
         />
-      </div>
 
-      <div class="w-full text-sm px-2 py-2 bg-white">
-        <table class="w-full mt-4 table-auto">
-          <tr class="border-b" v-for="(pk, pv) in imageProperties">
-            <td class="p-4 uppercase font-semibold text-gray-600">
-              {{ pk.toUpperCase() }}
-            </td>
-            <td class="p-4 font-mono">{{ selectedPhoto[pv] }}</td>
-          </tr>
-        </table>
+        <figcaption
+          class="figure-caption text-center"
+          v-text="selectedPhoto.name"
+        >
+        </figcaption>
+      </figure>
 
+      <div
+        class="mt-2 mb-2"
+      >
         <button
           @click="deleteSelected()"
           v-if="allowDelete"
-          class="text-red-500 border m-4 mt-6 px-4 text-sm py-1 hover:border border-red-500 hover:text-white hover:bg-red-500 rounded cursor-pointer"
+          class="btn btn-error"
         >
           Delete
         </button>
@@ -185,7 +186,9 @@
         class="container"
         v-if="uploadableFiles.length > 0"
       >
-        <table class="table table-striped table-hover">
+        <table
+          class="table table-striped table-hover"
+        >
           <thead>
             <tr>
               <th>#</th>
@@ -216,17 +219,6 @@
         </table>
       </div>
     </div>
-
-    <div
-      class="container"
-      v-if="message"
-    >
-      <div
-        class="toast toast-primary"
-        v-text="message"
-      >
-      </div>
-    </div>
   </div>
 </template>
 
@@ -238,10 +230,6 @@ export default {
     images: {
       type: Array,
       default: () => [],
-    },
-
-    imageProperties: {
-      type: Object,
     },
 
     allowUpload: {
