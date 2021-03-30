@@ -1,65 +1,81 @@
 <template>
-  <div class="w-full">
+  <div>
     <div
       v-show="pane === 'gallery'"
-      class="w-full mx-auto py-4 bg-transparent my-4 flex items-center flex-no-wrap"
+      class="container"
       id="top-panel"
     >
-      <div class="flex-grow flex">
-        <input
-          class="p-2 w-full rounded-l-lg rounded-r-lg sm:rounded-r-none border sm:border-r-0 border-gray-300 bg-white outline-none"
-          type="text"
-          v-model="query"
-          @keyup="doDelayedSearch"
-          placeholder="search..."
-        />
-        <div
-          class="hidden sm:flex relative pin-r rounded-r-lg border-r border-t border-b border-gray-300 bg-white py-1 px-2 items-center"
-        >
-          <span
-            v-if="searchResult"
-            class="py-1 px-2 bg-transparent rounded-lg text-xs whitespace-no-wrap"
-            v-text="searchResult"
-          ></span>
+      <div
+        class="columns col-oneline mt-2 mb-2"
+      >
+        <div class="column col">
+          <input
+            class="form-input"
+            type="text"
+            v-model="query"
+            @keyup="doDelayedSearch"
+            placeholder="search..."
+          />
+          <div
+            v-if="isSearching"
+            class="mt-2 mb-2"
+          >
+            <div
+              class="loading loading-lg"
+            ></div>
+
+          </div>
         </div>
-      </div>
-      <div class="flex-none" v-if="allowUpload">
-        <button
-          type="button"
-          class="text-white bg-blue-600 mx-2 px-4 py-2 rounded"
-          title="Upload Image"
-          @click="pane = 'upload'"
+
+        <div
+          v-if="allowUpload"
+          class="column col-auto"
         >
-          Add Image
-        </button>
+          <button
+            class="btn btn-primary btn-action btn-lg"
+            @click="pane = 'upload'"
+          >
+            <i class="icon icon-upload"></i>
+          </button>
+        </div>
       </div>
     </div>
 
     <div
       v-show="pane === 'gallery'"
-      class="w-full flex flex-wrap thumbnail-container overflow-y-scroll"
+      class="container"
     >
       <div
-        v-for="photo in images"
-        :key="photo.id"
-        :class="imagesPerRow"
-        @click="select(photo)"
+        class="columns"
       >
         <div
-          class="bg-white shadow mr-4 mb-4 cursor-pointer"
-          :class="selectedPhoto.id === photo.id ? 'border border-blue-600' : ''"
+          v-show="!isSearching"
+          v-for="photo in images"
+          :key="photo.id"
+          :class="imagesPerRow"
+          @click="select(photo)"
         >
-          <div class="w-full flex items-center justify-center thumbnail">
-            <img
-              v-bind:data-src="photo.url"
-              :title="photo.name"
-              class="mg-photo"
-            />
-          </div>
           <div
-            class="w-full flex bg-white justify-between text-gray-600 text-xs p-2"
+            class="card mb-2"
           >
-            <span class="truncate">{{ photo.name }}</span>
+            <div class="card-image">
+              <img
+                v-bind:data-src="photo.url"
+                :title="photo.name"
+                class="mg-photo img-responsive"
+              />
+            </div>
+
+            <div
+              class="card-body"
+            >
+            </div>
+
+            <div
+              class="card-footer"
+            >
+              {{ photo.name }}
+            </div>
           </div>
         </div>
       </div>
@@ -67,36 +83,22 @@
 
     <div
       v-if="pane === 'photo'"
-      class="w-full mx-auto py-4 px-4 bg-transparent flex justify-between items-center"
+      class="container"
     >
-      <button class="flex items-center" @click="pane = 'gallery'">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          class="fill-current h-8 w-8 rounded-full border border-gray-600 p-2 text-gray-600 mr-2"
+      <div class="columns">
+        <div
+          class="column col4 col-mr-auto mt-2 mb-2"
         >
-          <polygon
-            points="3.828 9 9.899 2.929 8.485 1.515 0 10 .707 10.707 8.485 18.485 9.899 17.071 3.828 11 20 11 20 9 3.828 9"
-          />
-        </svg>
-        <p class="text-blue-700 text-xl">Back to Gallery</p>
-      </button>
-
-      <div class="flex items-center justify-between">
-        <button
-          @click="copy"
-          v-if="allowCopy"
-          class="py-2 px-6 text-blue-600 hover:text-blue-800 mt-4 ml-4"
-        >
-          {{ copyLinkText }}
-        </button>
-        <button
-          @click="choose"
-          v-if="allowChoose"
-          class="py-2 px-6 bg-green-500 text-white rounded shadow text-xl mt-4 ml-4"
-        >
-          {{ chooseBtnText }}
-        </button>
+          <button
+            class="btn btn-primary btn-action btn-lg"
+            @click="pane = 'gallery'"
+          >
+            <i
+              class="icon icon-arrow-left"
+            >
+            </i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -131,85 +133,82 @@
 
     <div
       v-if="pane === 'upload'"
-      class="w-full p-4 postcard-container overflow-y-scroll"
     >
-      <div class="flex justify-between">
-        <button class="flex items-center" @click="pane = 'gallery'">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            class="fill-current h-8 w-8 rounded-full border p-2 text-gray-600 mr-2"
-          >
-            <polygon
-              points="3.828 9 9.899 2.929 8.485 1.515 0 10 .707 10.707 8.485 18.485 9.899 17.071 3.828 11 20 11 20 9 3.828 9"
-            />
-          </svg>
-          <p class="text-gray-600 font-light text-lg hidden sm:block">
-            Back to Gallery
-          </p>
-        </button>
-        <form id="file-catcher" enctype="multipart/form-data" method="post">
-          <div class="w-full flex bg-transparent">
-            <label
-              class="flex items-center px-4 py-2 rounded-lg border border-blue-500 bg-white text-blue-500 tracking-wide cursor-pointer hover:bg-blue-500 hover:text-white"
-            >
-              <svg
-                class="w-8 h-8 mr-4"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
-                />
-              </svg>
-              <p class="text-base leading-normal">
-                Upload
-                <span class="hidden sm:inline">From Local Computer</span>
-              </p>
-              <input
-                id="files"
-                type="file"
-                name="files"
-                multiple
-                class="hidden"
-                @change="uploadFiles"
-              />
-            </label>
-          </div>
-        </form>
-      </div>
       <div
-        id="file-list-display"
-        class="w-full my-4"
+        class="container"
+      >
+        <div class="columns">
+          <div
+            class="column col4 col-mr-auto mt-2 mb-2"
+          >
+            <button
+              class="btn btn-primary btn-action btn-lg"
+              @click="pane = 'gallery'"
+            >
+              <i
+                class="icon icon-arrow-left"
+              >
+              </i>
+            </button>
+          </div>
+
+          <div
+            class="column col4 col-ml-auto mt-2 mb-2 text-right"
+          >
+            <form 
+              enctype="multipart/form-data"
+              method="post"
+            >
+              <label
+                class="btn"
+              >
+                  <i
+                    class="icon icon-upload"
+                  >
+                  </i> Upload From Local Computer
+
+                  <input
+                    id="files"
+                    type="file"
+                    name="files"
+                    multiple
+                    class="hidden"
+                    @change="uploadFiles"
+                  />
+              </label>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="container"
         v-if="uploadableFiles.length > 0"
       >
-        <table class="w-full my-2 text-sm">
+        <table class="table table-striped table-hover">
           <thead>
-            <tr class="bg-white text-left">
-              <th class="p-2 font-light hidden md:block">#</th>
-              <th class="p-2 font-light">File Name</th>
-              <th class="p-2 font-light">Status</th>
-              <th class="p-2 font-light">Progress</th>
+            <tr>
+              <th>#</th>
+              <th>File Name</th>
+              <th>Status</th>
+              <th>Progress</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              class="p-2 border-b"
               v-for="(f, index) in uploadableFiles"
               v-bind:key="index"
             >
-              <td v-text="index + 1" class="text-left p-2 hidden md:block"></td>
-              <td class="text-left p-2" v-text="f.name"></td>
+              <td v-text="index + 1"></td>
+              <td v-text="f.name"></td>
               <td>
                 <span v-text="f.status"></span>
               </td>
               <td>
                 <progress
-                  id="progressBar"
                   :value="f.completion"
                   max="100"
-                  class="my-2 w-full"
+                  class="progress"
                 ></progress>
               </td>
             </tr>
@@ -219,11 +218,14 @@
     </div>
 
     <div
-      class="p-2 bg-white w-full text-sm text-gray-600 rounded"
-      id="message"
+      class="container"
       v-if="message"
     >
-      <span v-text="message"></span>
+      <div
+        class="toast toast-primary"
+        v-text="message"
+      >
+      </div>
     </div>
   </div>
 </template>
@@ -267,16 +269,6 @@ export default {
       default: false,
     },
 
-    allowChoose: {
-      type: Boolean,
-      default: false,
-    },
-
-    allowCopy: {
-      type: Boolean,
-      default: false,
-    },
-
     captionable: {
       type: Boolean,
       default: false,
@@ -296,18 +288,19 @@ export default {
       type: String,
       default: 'image',
     },
+
+    isSearching: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   data: function () {
     return {
-      message: null,
       query: '',
-      searchResult: null,
       pane: 'gallery',
       selectedPhoto: {},
       uploadableFiles: [],
-      copyLinkText: 'Copy Link',
-      chooseBtnText: 'Choose',
     }
   },
 
@@ -329,15 +322,12 @@ export default {
 
   computed: {
     imagesPerRow() {
-      let xs = parseInt(this.maxImagesPerRow * (1 / 4)),
-        md = parseInt(this.maxImagesPerRow * (2 / 4)),
-        lg = parseInt(this.maxImagesPerRow * (3 / 4)),
-        xl = parseInt(this.maxImagesPerRow * (4 / 4))
+      let col = parseInt(12 / this.maxImagesPerRow)
 
       return (
-        'w-full w-1/' + xs + ' md:w-1/' + md + ' lg:w-1/' + lg + ' xl:w-1/' + xl
+        'column col-' + col + ' col-xs-12'
       )
-    },
+    }
   },
 
   methods: {
@@ -349,24 +339,6 @@ export default {
       this.captionable && (this.selectedPhoto['caption'] = this.getCaption())
 
       this.$emit('selected', this.selectedPhoto)
-    },
-
-    choose: function () {
-      this.captionable && (this.selectedPhoto['caption'] = this.getCaption())
-
-      this.$emit('chosen', this.selectedPhoto)
-
-      this.pane = 'gallery'
-    },
-
-    copy() {
-      let p = this
-
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(this.selectedPhoto.url).then(() => {
-          p.copyLinkText = 'Link Copied!'
-        })
-      }
     },
 
     getCaption() {
@@ -418,6 +390,8 @@ export default {
 
         upf.ajax.open('POST', p.saveUrl)
 
+console.log(p)
+console.log(upf)
         let header_keys = Object.keys(p.saveRequestHeaders)
         for (let i = 0; i < header_keys.length; i++) {
           let header = header_keys[i]
@@ -460,9 +434,6 @@ export default {
         clearTimeout(this.timer)
         this.timer = null
       }
-
-      if (p.query.length > 0) p.searchResult = 'Searching...'
-      else p.searchResult = ''
 
       this.timer = setTimeout(() => {
         p.$emit('searched', p.query)
@@ -535,10 +506,7 @@ export default {
     overflow: hidden;
   }
 }
-
-.mg-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.card:hover {
+  cursor: pointer;
 }
 </style>

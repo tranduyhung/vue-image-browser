@@ -2,18 +2,31 @@
 <html>
   <head>
     <title>Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="../dist/vue-image-browser.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
   </head>
   <body>
     <script type="text/x-template" id="imageManagerTemplate">
       <VueImageBrowser
           :images="photos"
           :image-properties="photoFields"
+          :is-searching="isSearching"
+          :max-images-per-row="6"
+          :save-request-headers="{}"
+          :save-url="'https://httpbin.org/post'"
           allow-upload
           allow-delete
-          enable-lazy-load>
+          enable-lazy-load
+          @selected="onSelect"
+          @chosen="onChoose"
+          @saved="onSave"
+          @deleted="onDelete"
+          @searched="onSearch">
       </VueImageBrowser>
     </script>
 
