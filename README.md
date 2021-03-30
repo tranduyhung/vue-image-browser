@@ -25,7 +25,7 @@ UNDER DEVELOPMENT
 <template>
 
     <VueImageManager
-        :images="photos"
+        :images="images"
         allow-upload
         allow-delete
         enable-lazy-load>
@@ -41,12 +41,12 @@ export default {
     },
     data() {
         return {
-            photos: [
+            images: [
                 {'id': 1, 'name': 'sunflower.jpg', 'url': '/images/sunflower.jpg'},
                 {'id': 2, 'name': 'rose.jpg', 'url': '/images/rose.jpg'},
                 {'id': 3, 'name': 'tulip.jpg', 'url': '/images/tulip.jpg'},
             ],
-            photoFields: {
+            imageFields: {
                 'id': 'Image ID', 'name': 'File Name', 'url': 'Image Location'
             }
         }
@@ -76,9 +76,9 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 |------------------------|---------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `images`               | Array   | `[]`          | An array containing the image objects. Each image object must contain `id`, `name` and `url` of the image                                                                                        |
 | `allow-upload`         | Boolean | false         | (OPTIONAL) Whether or not to provide provision for image upload. If this is `true`, a `save-url` must be provided.                                                                               |
-| `save-url`             | String  | /api/photos   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
+| `save-url`             | String  | /api/images   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
 | `save-request-headers` | Object  | `{}`          | (OPTIONAL) If you need to pass any additional HTTP headers, you may do so by providing the header names and values in this object                                                                |
-| `allow-delete`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for deleting an image in Photo Pane view. If this is true, delete button will be shown and a `deleted` event will be generated                  |
+| `allow-delete`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for deleting an image in Image Pane view. If this is true, delete button will be shown and a `deleted` event will be generated                  |
 | `captionable`          | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for specifying the image caption after selecting an image. If this is true, a prompt will be shown for image caption when users select an image |
 | `enable-lazy-load`     | Boolean | true          | (OPTIONAL) Uses IntersectionObserver to ensure the images are only loaded to browser when the image comes near the browser viewport                                                              |
 | `search-delay`         | Number  | 500           | (OPTIONAL) A delay in miliseconds after which the search event is fired.                                                                                                                         |
@@ -105,7 +105,7 @@ Following events are generated when performing various interactions with the ima
 
 
         <VueImageManager
-            :images="photos"
+            :images="images"
             allow-upload
             allow-delete
             enable-lazy-load
@@ -131,7 +131,7 @@ export default {
     },
     data() {
         return {
-            photos: [],
+            images: [],
             headers: {
                 "X-CSRF-Token": document.head.querySelector('meta[name="csrf-token"]').content
             },
@@ -154,10 +154,10 @@ export default {
             // make an ajax call to server to delete the image
             // TODO
             // on ajax success, remove the image from your list
-            for(let i = 0; i < p.photos.length; i++) {
-                let photo = p.photos[i]
-                if (photo.id === image.id){
-                        p.photos.splice(i, 1)
+            for(let i = 0; i < p.images.length; i++) {
+                let image = p.images[i]
+                if (image.id === image.id){
+                        p.images.splice(i, 1)
                         break
                 }
             }
@@ -172,7 +172,7 @@ export default {
         },
 
         onSave(image) {
-            this.photos.unshift(image)
+            this.images.unshift(image)
         },
 
         getFromServer(search_phrase) {

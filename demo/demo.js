@@ -2,7 +2,7 @@ var imageManager = {
   template: '#imageManagerTemplate',
   data() {
     return {
-      allPhotos: [
+      allImages: [
         {'id': 1, 'name': 'andreas-gucklhorn-mawU2PoJWfU-unsplash.jpg', 'url': 'andreas-gucklhorn-mawU2PoJWfU-unsplash.jpg'},
         {'id': 2, 'name': 'david-marcu-78A265wPiO4-unsplash.jpg', 'url': 'david-marcu-78A265wPiO4-unsplash.jpg'},
         {'id': 3, 'name': 'jay-mantri-TFyi0QOx08c-unsplash.jpg', 'url': 'jay-mantri-TFyi0QOx08c-unsplash.jpg'},
@@ -13,8 +13,8 @@ var imageManager = {
         {'id': 8, 'name': 'tim-swaan-eOpewngf68w-unsplash.jpg', 'url': 'tim-swaan-eOpewngf68w-unsplash.jpg'},
         {'id': 9, 'name': 'v2osk-1Z2niiBPg5A-unsplash.jpg', 'url': 'v2osk-1Z2niiBPg5A-unsplash.jpg'},
       ],
-      photos: [],
-      photoFields: {
+      images: [],
+      imageFields: {
         'id': 'Image ID', 'name': 'File Name', 'url': 'Image Location'
       },
       isSearching: false,
@@ -26,10 +26,10 @@ var imageManager = {
       // make an ajax call to server to delete the image
       // TODO
       // on ajax success, remove the image from your list
-      for(let i = 0; i < p.photos.length; i++) {
-        let photo = p.photos[i]
-        if (photo.id === image.id){
-          p.photos.splice(i, 1)
+      for(let i = 0; i < p.images.length; i++) {
+        let image = p.images[i]
+        if (image.id === image.id){
+          p.images.splice(i, 1)
           break
         }
       }
@@ -54,12 +54,12 @@ var imageManager = {
       setTimeout(function() {
         if (query) {
           // Create a different list of images.
-          _this.photos.pop()
-          _this.photos.pop()
-          _this.photos.pop()
+          _this.images.pop()
+          _this.images.pop()
+          _this.images.pop()
         } else {
-          // Clear search result, all photos appear.
-          _this.photos = _this.allPhotos
+          // Clear search result, all images appear.
+          _this.images = _this.allImages
         }
 
         _this.isSearching = false
@@ -72,8 +72,8 @@ var imageManager = {
     },
   },
   mounted() {
-    for (i = 0; i <this.allPhotos.length; i++) {
-      this.photos.push(this.allPhotos[i])
+    for (i = 0; i <this.allImages.length; i++) {
+      this.images.push(this.allImages[i])
     }
   }
 }

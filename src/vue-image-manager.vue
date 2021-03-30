@@ -50,19 +50,19 @@
       >
         <div
           v-show="!isSearching"
-          v-for="photo in images"
-          :key="photo.id"
+          v-for="image in images"
+          :key="image.id"
           :class="imagesPerRow"
-          @click="select(photo)"
+          @click="select(image)"
         >
           <div
             class="card mb-2"
           >
             <div class="card-image">
               <img
-                v-bind:data-src="photo.url"
-                :title="photo.name"
-                class="mg-photo img-responsive"
+                v-bind:data-src="image.url"
+                :title="image.name"
+                class="mg-image img-responsive"
               />
             </div>
 
@@ -74,7 +74,7 @@
             <div
               class="card-footer"
             >
-              {{ photo.name }}
+              {{ image.name }}
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
     </div>
 
     <div
-      v-if="pane === 'photo'"
+      v-if="pane === 'image'"
       class="container"
     >
       <div class="columns">
@@ -102,19 +102,19 @@
       </div>
     </div>
 
-    <div v-if="pane === 'photo'">
+    <div v-if="pane === 'image'">
       <figure
         class="figure"
       >
         <img
-          :src="selectedPhoto.url"
-          :title="selectedPhoto.name"
+          :src="selectedImage.url"
+          :title="selectedImage.name"
           class="img-responsive p-centered"
         />
 
         <figcaption
           class="figure-caption text-center"
-          v-text="selectedPhoto.name"
+          v-text="selectedImage.name"
         >
         </figcaption>
       </figure>
@@ -239,7 +239,7 @@ export default {
 
     saveUrl: {
       type: String,
-      default: '/api/photos',
+      default: '/api/images',
     },
 
     saveRequestHeaders: {
@@ -287,7 +287,7 @@ export default {
     return {
       query: '',
       pane: 'gallery',
-      selectedPhoto: {},
+      selectedImage: {},
       uploadableFiles: [],
     }
   },
@@ -319,19 +319,19 @@ export default {
   },
 
   methods: {
-    select(photo) {
-      this.selectedPhoto = photo
+    select(image) {
+      this.selectedImage = image
 
-      this.pane = 'photo'
+      this.pane = 'image'
 
-      this.captionable && (this.selectedPhoto['caption'] = this.getCaption())
+      this.captionable && (this.selectedImage['caption'] = this.getCaption())
 
-      this.$emit('selected', this.selectedPhoto)
+      this.$emit('selected', this.selectedImage)
     },
 
     getCaption() {
       // remove file name extensions
-      let caption = this.selectedPhoto.name.replace(/\.[^/.]+$/, '')
+      let caption = this.selectedImage.name.replace(/\.[^/.]+$/, '')
 
       // remove special characters with space
       caption = caption.replace(/[^\w\s]/gi, ' ')
@@ -411,7 +411,7 @@ console.log(upf)
     },
 
     deleteSelected() {
-      this.$emit('deleted', this.selectedPhoto)
+      this.$emit('deleted', this.selectedImage)
       this.pane = 'gallery'
     },
 
@@ -431,7 +431,7 @@ console.log(upf)
     // This is an experimental function that enables
     // lazy-loading.
     enableLazyLoading() {
-      let images = document.querySelectorAll('.mg-photo')
+      let images = document.querySelectorAll('.mg-image')
 
       const config = {
         root: null,
