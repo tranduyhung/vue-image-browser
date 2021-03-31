@@ -34,6 +34,7 @@
           class="column col-auto"
         >
           <button
+            type="button"
             class="btn btn-primary btn-action btn-lg"
             @click="pane = 'upload'"
           >
@@ -92,6 +93,7 @@
           class="column col4 col-mr-auto mt-2 mb-2"
         >
           <button
+            type="button"
             class="btn btn-primary btn-action btn-lg"
             @click="pane = 'gallery'"
           >
@@ -125,6 +127,7 @@
         class="mt-2 mb-2"
       >
         <button
+          type="button"
           @click="deleteSelected()"
           v-if="allowDelete"
           class="btn btn-error"
@@ -145,6 +148,7 @@
             class="column col4 col-mr-auto mt-2 mb-2"
           >
             <button
+              type="button"
               class="btn btn-primary btn-action btn-lg"
               @click="pane = 'gallery'"
             >
