@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div
+    class="image-manager"
+  >
     <div
       v-show="pane === 'gallery'"
       class="container"
@@ -55,28 +57,28 @@
           :class="imagesPerRow"
           @click="select(image)"
         >
-          <div
-            class="card mb-2"
-          >
-            <div class="card-image">
-              <img
-                v-bind:data-src="image.url"
-                :title="image.name"
-                class="mg-image img-responsive"
-              />
-            </div>
-
             <div
-              class="card-body"
+              class="card"
             >
-            </div>
+              <div class="card-image">
+                <img
+                  v-bind:data-src="image.url"
+                  :title="image.name"
+                  class="mg-image img-responsive"
+                />
+              </div>
 
-            <div
-              class="card-footer"
-            >
-              {{ image.name }}
+              <div
+                class="card-body"
+              >
+              </div>
+
+              <div
+                class="card-footer"
+              >
+                {{ image.name }}
+              </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -313,7 +315,7 @@ export default {
       let col = parseInt(12 / this.maxImagesPerRow)
 
       return (
-        'column col-' + col + ' col-xs-12'
+        'column col-' + col + ' col-xs-12 mb-2'
       )
     }
   },
@@ -378,8 +380,6 @@ export default {
 
         upf.ajax.open('POST', p.saveUrl)
 
-console.log(p)
-console.log(upf)
         let header_keys = Object.keys(p.saveRequestHeaders)
         for (let i = 0; i < header_keys.length; i++) {
           let header = header_keys[i]
@@ -470,31 +470,15 @@ console.log(upf)
 </script>
 
 <style>
-@media only screen and (min-width: 640px) {
-  .thumbnail {
-    height: 300px;
-    overflow: hidden;
-  }
+.image-manager .card {
+  height: 100%;
 }
-@media only screen and (min-width: 768px) {
-  .thumbnail {
-    height: 250px;
-    overflow: hidden;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .thumbnail {
-    height: 200px;
-    overflow: hidden;
-  }
-}
-@media only screen and (min-width: 1280px) {
-  .thumbnail {
-    height: 120px;
-    overflow: hidden;
-  }
-}
-.card:hover {
+.image-manager .card:hover {
   cursor: pointer;
+}
+.image-manager .card-footer {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 </style>
