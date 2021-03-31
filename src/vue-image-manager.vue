@@ -16,7 +16,7 @@
             type="text"
             v-model="query"
             @keyup="doDelayedSearch"
-            placeholder="search..."
+            :placeholder="langSearchPlaceholder"
           />
           <div
             v-if="isSearching"
@@ -172,7 +172,7 @@
                   <i
                     class="icon icon-upload"
                   >
-                  </i> Upload From Local Computer
+                  </i> {{ langUploadButtonLabel }}
 
                   <input
                     id="files"
@@ -198,9 +198,9 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>File Name</th>
-              <th>Status</th>
-              <th>Progress</th>
+              <th v-text="langUploadFilename"></th>
+              <th v-text="langUploadStatus"></th>
+              <th v-text="langUploadProgress"></th>
             </tr>
           </thead>
           <tbody>
@@ -278,15 +278,55 @@ export default {
       default: 5,
     },
 
-    postKey: {
-      type: String,
-      default: 'image',
-    },
-
     isSearching: {
       type: Boolean,
       default: false,
-    }
+    },
+
+    langSearchPlaceholder: {
+      type: String,
+      default: 'search...',
+    },
+
+    langUploadButtonLabel: {
+      type: String,
+      default: 'Select Files',
+    },
+
+    langUploadFilename: {
+      type: String,
+      default: 'Filename',
+    },
+
+    langUploadStatus: {
+      type: String,
+      default: 'Status',
+    },
+
+    langUploadProgress: {
+      type: String,
+      default: 'Progress',
+    },
+
+    langUploadStatusPending: {
+      type: String,
+      default: 'Pending',
+    },
+
+    langUploadStatusUploading: {
+      type: String,
+      default: 'Uploaded %d KB',
+    },
+
+    langUploadStatusCompleted: {
+      type: String,
+      default: 'Completed',
+    },
+
+    langUploadStatusFailed: {
+      type: String,
+      default: 'Failed',
+    },
   },
 
   data: function () {
@@ -342,11 +382,10 @@ export default {
           name: files[i].name,
           formdata: new FormData(),
           ajax: new XMLHttpRequest(),
-          status: 'Not Started',
+          status: p.langUploadStatusPending,
           completion: 0,
         }
 
-        upf.formdata.append(this.postKey, files[i])
         upf.formdata.append('name', files[i].name)
 
         let formKeys = Object.keys(p.uploadFormData)
@@ -358,17 +397,17 @@ export default {
         }
 
         upf.ajax.upload.onprogress = function (e) {
-          upf.status = 'Uploaded ' + Math.round(e.loaded / 1000) + ' KB...'
+          upf.status = p.langUploadStatusUploading.replace('%d', Math.round(e.loaded / 1000))
           upf.completion = Math.round((e.loaded / e.total) * 100)
         }
 
         upf.ajax.upload.onload = function (e) {
-          upf.status = 'Complete'
+          upf.status = p.langUploadStatusCompleted
           upf.completion = 100
         }
 
         upf.ajax.upload.onerror = function (e) {
-          upf.status = 'Error uploading the file'
+          upf.status = p.langUploadStatusFailed
           upf.completion = 0
         }
 
@@ -396,8 +435,7 @@ export default {
           }
 
           if (upf.ajax.readyState === 4 && upf.ajax.status != 200) {
-            upf.status =
-              'Error uploading the file (Status = ' + upf.ajax.status + ')'
+            upf.status = langUploadStatusFailed
             upf.completion = 0
           }
         }

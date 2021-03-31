@@ -83,8 +83,16 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 | `enable-lazy-load`     | Boolean | true          | (OPTIONAL) Uses IntersectionObserver to ensure the images are only loaded to browser when the image comes near the browser viewport                                                              |
 | `search-delay`         | Number  | 500           | (OPTIONAL) A delay in miliseconds after which the search event is fired.                                                                                                                         |
 | `max-images-per-row`   | Number  | 5             | (OPTIONAL) Maximum number of images to be displayed in each row in image gallery. Must be a value from 1 to 6. Actual number of displayed images will vary based on screen-size                  |
-| `post-key`             | String  | image         | (OPTIONAL) The name of the post request parameter to be used while posting file to the server.                                                                                                   |
-
+| `is-searching`         | Boolean | false         | (OPTIONAL) Flag to know if we are getting images from server (init load or searching images). |
+| `lang-search-placeholder` | String | `search...` | (OPTIONAL) Text used for search input's placeholder. |
+| `lang-upload-button-label` | String | `Select Files` | (OPTIONAL) Upload button's label. |
+| `lang-upload-filename` | String | `Filename` | (OPTIONAL) Text for filename's heading of uploaded file table |
+| `lang-upload-status` | String | `Status` | (OPTIONAL) Text for status's heading of uploaded file table |
+| `lang-upload-progress` | String | `Progress` | (OPTIONAL) Text for upload progress's heading of uploaded file table |
+| `lang-upload-status-pending` | String | `Pending` | (OPTIONAL) Text for upload's pending status |
+| `lang-upload-status-uploading` | String | `Uploaded %d KB` | (OPTIONAL) Text for upload's uploading status. `%d` is replaced by file size. |
+| `lang-upload-status-completed` | String | `Completed` | (OPTIONAL) Text for upload's completed status |
+| `lang-upload-status-failed` | String | `Failed` | (OPTIONAL) Text for upload's failed status |
 
 ## Events
 
