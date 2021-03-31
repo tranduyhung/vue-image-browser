@@ -258,18 +258,12 @@ export default {
       default: () => {},
     },
 
-
     searchDelay: {
       type: Number,
       default: 500,
     },
 
     allowDelete: {
-      type: Boolean,
-      default: false,
-    },
-
-    captionable: {
       type: Boolean,
       default: false,
     },
@@ -336,26 +330,7 @@ export default {
 
       this.pane = 'image'
 
-      this.captionable && (this.selectedImage['caption'] = this.getCaption())
-
       this.$emit('select', this.selectedImage)
-    },
-
-    getCaption() {
-      // remove file name extensions
-      let caption = this.selectedImage.name.replace(/\.[^/.]+$/, '')
-
-      // remove special characters with space
-      caption = caption.replace(/[^\w\s]/gi, ' ')
-
-      // uppercase first letter of each word
-      caption = caption
-        .toLowerCase()
-        .split(' ')
-        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-        .join(' ')
-
-      return prompt('Enter an caption for this image', caption)
     },
 
     uploadFiles: function () {
