@@ -179,7 +179,7 @@
                     type="file"
                     name="files"
                     multiple
-                    class="hidden"
+                    class="d-none"
                     @change="uploadFiles"
                   />
               </label>
