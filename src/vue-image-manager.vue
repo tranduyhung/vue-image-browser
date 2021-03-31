@@ -243,12 +243,12 @@ export default {
       default: false,
     },
 
-    saveUrl: {
+    uploadUrl: {
       type: String,
       default: '/api/images',
     },
 
-    saveRequestHeaders: {
+    uploadRequestHeaders: {
       type: Object,
       default: () => {},
     },
@@ -332,7 +332,7 @@ export default {
 
       this.captionable && (this.selectedImage['caption'] = this.getCaption())
 
-      this.$emit('selected', this.selectedImage)
+      this.$emit('select', this.selectedImage)
     },
 
     getCaption() {
@@ -382,12 +382,12 @@ export default {
         }
         // ajax.upload.addEventListener('abort', abortHandler, false);
 
-        upf.ajax.open('POST', p.saveUrl)
+        upf.ajax.open('POST', p.uploadUrl)
 
-        let header_keys = Object.keys(p.saveRequestHeaders)
+        let header_keys = Object.keys(p.uploadRequestHeaders)
         for (let i = 0; i < header_keys.length; i++) {
           let header = header_keys[i]
-          let val = p.saveRequestHeaders[header]
+          let val = p.uploadRequestHeaders[header]
           upf.ajax.setRequestHeader(header, val)
         }
 
@@ -397,7 +397,7 @@ export default {
             if (response) {
               try {
                 let media = JSON.parse(response)
-                p.$emit('saved', media)
+                p.$emit('uploaded', media)
               } catch (e) {
                 alert(e)
               }
@@ -415,7 +415,7 @@ export default {
     },
 
     deleteSelected() {
-      this.$emit('deleted', this.selectedImage)
+      this.$emit('delete', this.selectedImage)
       this.pane = 'gallery'
     },
 
@@ -428,7 +428,7 @@ export default {
       }
 
       this.timer = setTimeout(() => {
-        p.$emit('searched', p.query)
+        p.$emit('search', p.query)
       }, this.searchDelay)
     },
 

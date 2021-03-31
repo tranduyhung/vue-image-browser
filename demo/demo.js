@@ -39,8 +39,8 @@ var imageManager = {
       console.log('onSelect', image)
     },
 
-    onChoose(image) {
-      console.log('onChoose', image)
+    onUploaded(image) {
+      console.log('onUploaded', image)
     },
 
     onSearch(query) {
@@ -66,10 +66,6 @@ var imageManager = {
       }, 2000)
 
     },
-
-    onSave(image) {
-      console.log('onSave', image)
-    },
   },
   mounted() {
     for (i = 0; i <this.allImages.length; i++) {
@@ -83,10 +79,4 @@ var app = new Vue({
   components: {
     'image-manager': imageManager
   },
-  data: {
-    message: 'Hello Vue!'
-  },
-  methods: {
-    
-  }
 })

@@ -15,16 +15,15 @@
           :images="images"
           :is-searching="isSearching"
           :max-images-per-row="6"
-          :save-request-headers="{}"
-          :save-url="'https://httpbin.org/post'"
+          :upload-request-headers="{}"
+          :upload-url="'https://httpbin.org/post'"
           allow-upload
           allow-delete
           enable-lazy-load
-          @selected="onSelect"
-          @chosen="onChoose"
-          @saved="onSave"
-          @deleted="onDelete"
-          @searched="onSearch">
+          @select="onSelect"
+          @delete="onDelete"
+          @search="onSearch"
+          @uploaded="onUploaded">
       </VueImageManager>
     </script>
 

@@ -58,16 +58,15 @@ export default {
 
 ## Image Object
 
-The `images` attribute in `VueImageManager` accepts an array containing one or more "image objects" with following mandatory fields - `id`, `name` and `url`. The image object can contain other fields as well.
-
-
+It is possible to upload an image to a specified API endpoint (`save-url`) via POST.
+When an image is uploaded successfully, a 200 HTTP Status code response must be sent back from the server with a response JSON. After the image is uploaded successfully, a `uploaded` event will be generated and the response JSON will be passed with the event. Please see the example section below.
 
 ## Image Upload Response
 
 ![](images/example-image-2.png)
 
-It is possible to upload an image to a specified API endpoint (`save-url`) via POST.
-When an image is uploaded successfully, a 200 HTTP Status code response must be sent back from the server with a response JSON. After the image is uploaded successfully, a `saved` event will be generated and the response JSON will be passed with the event. Please see the example section below.
+It is possible to upload an image to a specified API endpoint (`upload-url`) via POST.
+When an image is uploaded successfully, a 200 HTTP Status code response must be sent back from the server with a response JSON. Please see the example section below.
 
 
 ## Options
@@ -75,10 +74,10 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 | Parameter              | Type    | Default Value | Description                                                                                                                                                                                      |
 |------------------------|---------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `images`               | Array   | `[]`          | An array containing the image objects. Each image object must contain `id`, `name` and `url` of the image                                                                                        |
-| `allow-upload`         | Boolean | false         | (OPTIONAL) Whether or not to provide provision for image upload. If this is `true`, a `save-url` must be provided.                                                                               |
-| `save-url`             | String  | /api/images   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
-| `save-request-headers` | Object  | `{}`          | (OPTIONAL) If you need to pass any additional HTTP headers, you may do so by providing the header names and values in this object                                                                |
-| `allow-delete`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for deleting an image in Image Pane view. If this is true, delete button will be shown and a `deleted` event will be generated                  |
+| `allow-upload`         | Boolean | false         | (OPTIONAL) Whether or not to provide provision for image upload. If this is `true`, a `upload-url` must be provided.                                                                               |
+| `upload-url`           | String  | /api/images   | Specify the URL endpoint for posting the uploaded images.                                                                                                                                        |
+| `upload-request-headers`| Object  | `{}`          | (OPTIONAL) If you need to pass any additional HTTP headers, you may do so by providing the header names and values in this object                                                                |
+| `allow-delete`         | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for deleting an image in Image Pane view. If this is true, delete button will be shown and a `delete` event will be generated                  |
 | `captionable`          | Boolean | false         | (OPTIONAL) Whether or not to provide a provision for specifying the image caption after selecting an image. If this is true, a prompt will be shown for image caption when users select an image |
 | `enable-lazy-load`     | Boolean | true          | (OPTIONAL) Uses IntersectionObserver to ensure the images are only loaded to browser when the image comes near the browser viewport                                                              |
 | `search-delay`         | Number  | 500           | (OPTIONAL) A delay in miliseconds after which the search event is fired.                                                                                                                         |
@@ -92,10 +91,10 @@ Following events are generated when performing various interactions with the ima
 
 | Event         | Parameter Type  | Parameter Value   |  Description                                                                                                                                                              |
 |---------------|-----------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `searched`    | String          | seach phrase      | This event is generated when users search in the search box. The search phrase is passed to the event handler, which can be used to filter the images array               |
-| `selected`    | Object          | image             | This event is generated when users click on an image in the Gallery. The image is passed to the event handler.                                                            |
-| `saved`       | Object          | image             | This event is generated when users successfully upload an image. The image is passed to the event handler.                                                                |
-| `deleted`     | Object          | image             | This event is generated when users delete an image. The image is passed to the event handler.                                                                             |
+| `search`      | String          | seach phrase      | This event is generated when users search in the search box. The search phrase is passed to the event handler, which can be used to filter the images array               |
+| `selecte`     | Object          | image             | This event is generated when users click on an image in the Gallery. The image is passed to the event handler.                                                            |
+| `delete`      | Object          | image             | This event is generated when users delete an image. The image is passed to the event handler.
+| `uploaded`    | Object          | image             | This event is generated when users successfully upload an image. The image is passed to the event handler.  
 
 
 ## Example
@@ -109,12 +108,11 @@ Following events are generated when performing various interactions with the ima
             allow-upload
             allow-delete
             enable-lazy-load
-            save-url="/api/media"
-            :save-request-headers="headers"
-            @selected="onSelect"
-            @saved="onSave"
-            @deleted="onDelete"
-            @searched="onSearch"
+            upload-url="/api/media"
+            :upload-request-headers="headers"
+            @select="onSelect"
+            @delete="onDelete"
+            @search="onSearch"
             >
         </VueImageManager>
 
