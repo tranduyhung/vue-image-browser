@@ -253,6 +253,12 @@ export default {
       default: () => {},
     },
 
+    uploadFormData: {
+      type: Object,
+      default: () => {},
+    },
+
+
     searchDelay: {
       type: Number,
       default: 500,
@@ -368,25 +374,35 @@ export default {
         upf.formdata.append(this.postKey, files[i])
         upf.formdata.append('name', files[i].name)
 
+        let formKeys = Object.keys(p.uploadFormData)
+
+        for (let i = 0; i < formKeys.length; i++) {
+          let key = formKeys[i]
+          let val = p.uploadFormData[key]
+          upf.formdata.append(key, val)
+        }
+
         upf.ajax.upload.onprogress = function (e) {
           upf.status = 'Uploaded ' + Math.round(e.loaded / 1000) + ' KB...'
           upf.completion = Math.round((e.loaded / e.total) * 100)
         }
+
         upf.ajax.upload.onload = function (e) {
           upf.status = 'Complete'
           upf.completion = 100
         }
+
         upf.ajax.upload.onerror = function (e) {
           upf.status = 'Error uploading the file'
           upf.completion = 0
         }
-        // ajax.upload.addEventListener('abort', abortHandler, false);
 
         upf.ajax.open('POST', p.uploadUrl)
 
-        let header_keys = Object.keys(p.uploadRequestHeaders)
-        for (let i = 0; i < header_keys.length; i++) {
-          let header = header_keys[i]
+        let headerKeys = Object.keys(p.uploadRequestHeaders)
+
+        for (let i = 0; i < headerKeys.length; i++) {
+          let header = headerKeys[i]
           let val = p.uploadRequestHeaders[header]
           upf.ajax.setRequestHeader(header, val)
         }
@@ -403,13 +419,15 @@ export default {
               }
             }
           }
+
           if (upf.ajax.readyState === 4 && upf.ajax.status != 200) {
             upf.status =
               'Error uploading the file (Status = ' + upf.ajax.status + ')'
             upf.completion = 0
           }
         }
-        upf.ajax.send(upf.formdata)
+
+      upf.ajax.send(upf.formdata)
         this.uploadableFiles.push(upf)
       }
     },
