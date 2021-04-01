@@ -103,7 +103,7 @@ Following events are generated when performing various interactions with the ima
 | `search`      | String          | seach phrase      | This event is generated when users search in the search box. The search phrase is passed to the event handler, which can be used to filter the images array               |
 | `select`      | Object          | image             | This event is generated when users click on an image in the Gallery. The image is passed to the event handler.                                                            |
 | `delete`      | Object          | image             | This event is generated when users delete an image. The image is passed to the event handler.
-| `uploaded`    | Object          | image             | This event is generated when users successfully upload an image. The image is passed to the event handler.  
+| `uploaded`    | Object          | XMLHttpRequest    | This event is called when the AJAX upload request completes. The XMLHttpRequest object is passed to the event handler so that developer has access to all the data.  
 
 
 ## Example

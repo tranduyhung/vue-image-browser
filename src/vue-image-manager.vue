@@ -422,21 +422,13 @@ export default {
         }
 
         upf.ajax.onreadystatechange = function () {
-          if (upf.ajax.readyState === 4 && upf.ajax.status === 200) {
-            let response = upf.ajax.responseText
-            if (response) {
-              try {
-                let media = JSON.parse(response)
-                p.$emit('uploaded', media)
-              } catch (e) {
-                alert(e)
-              }
+          if (upf.ajax.readyState === 4) {
+            if (upf.ajax.status != 200) {
+              upf.status = langUploadStatusFailed
+              upf.completion = 0
             }
-          }
 
-          if (upf.ajax.readyState === 4 && upf.ajax.status != 200) {
-            upf.status = langUploadStatusFailed
-            upf.completion = 0
+            p.$emit('uploaded', upf.ajax)
           }
         }
 
