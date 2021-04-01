@@ -250,12 +250,12 @@ export default {
 
     uploadRequestHeaders: {
       type: Object,
-      default: () => {},
+      default: () => { return {} },
     },
 
     uploadFormData: {
       type: Object,
-      default: () => {},
+      default: () => { return {} },
     },
 
     searchDelay: {
