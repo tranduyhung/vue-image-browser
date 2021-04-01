@@ -386,7 +386,7 @@ export default {
           completion: 0,
         }
 
-        upf.formdata.append('name', files[i].name)
+        upf.formdata.append('file', files[i])
 
         let formKeys = Object.keys(p.uploadFormData)
 
@@ -440,8 +440,8 @@ export default {
           }
         }
 
-      upf.ajax.send(upf.formdata)
-        this.uploadableFiles.push(upf)
+        upf.ajax.send(upf.formdata)
+          this.uploadableFiles.push(upf)
       }
     },
 
