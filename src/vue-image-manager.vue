@@ -175,9 +175,7 @@
                   </i> {{ langUploadButtonLabel }}
 
                   <input
-                    id="files"
                     type="file"
-                    name="files"
                     multiple
                     class="d-none"
                     @change="uploadFiles"
@@ -373,9 +371,10 @@ export default {
       this.$emit('select', this.selectedImage)
     },
 
-    uploadFiles: function () {
-      let files = document.getElementById('files').files,
-        p = this
+    uploadFiles: function (event) {
+      let input = event.target
+      let files = input.files
+      let p = this
 
       for (let i = 0; i < files.length; i++) {
         let upf = {
