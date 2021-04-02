@@ -106,7 +106,9 @@
       </div>
     </div>
 
-    <div v-if="pane === 'image'">
+    <div
+      v-if="pane === 'image'"
+      class="container">
       <figure
         class="figure"
       >
@@ -128,9 +130,10 @@
       >
         <button
           type="button"
-          @click="deleteSelected()"
+          @click="deleteSelected"
           v-if="allowDelete"
           class="btn btn-error"
+          v-bind:class="{ loading: isDeleting }"
         >
           Delete
         </button>
@@ -277,6 +280,11 @@ export default {
     },
 
     isSearching: {
+      type: Boolean,
+      default: false,
+    },
+
+    isDeleting: {
       type: Boolean,
       default: false,
     },
@@ -438,7 +446,6 @@ export default {
 
     deleteSelected() {
       this.$emit('delete', this.selectedImage)
-      this.pane = 'gallery'
     },
 
     doDelayedSearch() {

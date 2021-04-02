@@ -18,21 +18,19 @@ var imageManager = {
         'id': 'Image ID', 'name': 'File Name', 'url': 'Image Location'
       },
       isSearching: false,
+      isDeleting: false,
     }
   },
   methods: {
     onDelete(image) {
-      console.log('onDelete', image)
-      // make an ajax call to server to delete the image
-      // TODO
-      // on ajax success, remove the image from your list
-      for(let i = 0; i < p.images.length; i++) {
-        let image = p.images[i]
-        if (image.id === image.id){
-          p.images.splice(i, 1)
-          break
-        }
-      }
+      let _this = this
+
+      _this.isDeleting = true
+
+      // Simulate deleting image on server
+      setTimeout(function() {
+        _this.isDeleting = false
+      }, 5000)
     },
 
     onSelect(image) {
