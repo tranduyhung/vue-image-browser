@@ -350,6 +350,14 @@ export default {
     }
   },
 
+  watch: {
+    'isDeleting': function(newValue) {
+      if (newValue === false) {
+        this.pane = 'gallery'
+      }
+    }
+  },
+
   created() {
     this.$nextTick(function () {
       if (this.enableLazyLoad) {
