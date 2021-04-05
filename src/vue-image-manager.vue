@@ -134,8 +134,9 @@
           v-if="allowDelete"
           class="btn btn-error"
           v-bind:class="{ loading: isDeleting }"
+          :disabled="isDeleting"
         >
-          Delete
+          {{ langDeleteButtonLabel }}
         </button>
       </div>
     </div>
@@ -297,6 +298,11 @@ export default {
     langUploadButtonLabel: {
       type: String,
       default: 'Select Files',
+    },
+
+    langDeleteButtonLabel: {
+      type: String,
+      default: 'Delete',
     },
 
     langUploadFilename: {

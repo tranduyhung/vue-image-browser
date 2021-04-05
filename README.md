@@ -87,6 +87,7 @@ When an image is uploaded successfully, a 200 HTTP Status code response must be 
 | `is-deleting`          | Boolean | false         | (OPTIONAL) Flag to know if we are sending request to server to delete an image. |
 | `lang-search-placeholder` | String | `search...` | (OPTIONAL) Text used for search input's placeholder. |
 | `lang-upload-button-label` | String | `Select Files` | (OPTIONAL) Upload button's label. |
+| `lang-delete-button-label` | String | `Delete` | (OPTIONAL) Delete button's label. |
 | `lang-upload-filename` | String | `Filename` | (OPTIONAL) Text for filename's heading of uploaded file table |
 | `lang-upload-status` | String | `Status` | (OPTIONAL) Text for status's heading of uploaded file table |
 | `lang-upload-progress` | String | `Progress` | (OPTIONAL) Text for upload progress's heading of uploaded file table |
