@@ -40,30 +40,6 @@ var imageManager = {
     onUploaded(image) {
       console.log('onUploaded', image)
     },
-
-    onSearch(query) {
-      console.log('onSearch', query)
-
-      this.isSearching = true
-
-      let _this = this
-
-      // Simulate searching
-      setTimeout(function() {
-        if (query) {
-          // Create a different list of images.
-          _this.images.pop()
-          _this.images.pop()
-          _this.images.pop()
-        } else {
-          // Clear search result, all images appear.
-          _this.images = _this.allImages
-        }
-
-        _this.isSearching = false
-      }, 2000)
-
-    },
   },
   mounted() {
     for (i = 0; i <this.allImages.length; i++) {

@@ -200,9 +200,12 @@
           <thead>
             <tr>
               <th>#</th>
-              <th v-text="langUploadFilename"></th>
-              <th v-text="langUploadStatus"></th>
-              <th v-text="langUploadProgress"></th>
+              <th
+                v-text="langUploadFilename"></th>
+              <th
+                v-text="langUploadStatus"></th>
+              <th
+                v-text="langUploadProgress"></th>
             </tr>
           </thead>
           <tbody>
@@ -210,10 +213,14 @@
               v-for="(f, index) in uploadableFiles"
               v-bind:key="index"
             >
-              <td v-text="index + 1"></td>
-              <td v-text="f.name"></td>
+              <td
+                v-text="index + 1"></td>
+              <td
+                class="text-break"
+                v-text="f.name"></td>
               <td>
-                <span v-text="f.status"></span>
+                <span
+                  v-text="f.status"></span>
               </td>
               <td>
                 <progress
